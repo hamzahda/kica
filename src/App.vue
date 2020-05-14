@@ -84,4 +84,152 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+body {
+    margin: 0px auto;
+    width: 100%;
+    font-family: 'H', 'Trebuchet MS', Helvetica;
+    background-color: #f2f2f2;
+    color: #cfcfcf;
+}
+
+button {
+    background-color: #f2f2f2;
+    border: 1px solid gray;
+    border-radius: 10px;
+    border: none;
+    margin: 20px;
+    padding: 10px;
+    font-size: 18px;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 1;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+}
+
+#controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+}
+
+#headerBar {
+    width: 100%;
+    height: 10%;
+    background-color: #4a4a4a;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#pageTitle {
+    font-size: 220%;
+    margin-right: auto;
+    padding: 20px;
+    float: left;
+}
+
+#mainBody {
+    position: fixed;
+    bottom: 0;
+    height: 85%;
+    margin: 5% 10% 0 10%;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: flex-end;
+    align-items: flex-end;
+}
+
+select {
+    margin: 20px;
+    height: 30px;
+    width: 160px;
+    border-radius: 7px;
+    border: none;
+    background-color: #f2f2f2;
+    opacity: 0.8;
+}
+
+select:hover {
+    opacity: 1;
+}
+
+.sliderContainer {
+    text-align: center;
+    margin: 20px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 15px;
+    width: 160px;
+    background-color: #f2f2f2;
+    border-radius: 7px;
+    margin: 5px;
+    opacity: 0.8;
+}
+
+input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 15px;
+    width: 15px;
+    border-radius: 7px;
+    border: none;
+    appearance: none;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+input::-moz-range-thumb {
+    background: #4CAF50;
+    width: 15px;
+    border: none;
+    height: 15px;
+    cursor: pointer;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.valueBlockPair {
+    height: 100%;
+    width: 5px;
+    margin: 1px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.block {
+    height: 100%;
+    width: 90%;
+    background-color: #c70d00;
+}
+
+.value {
+    text-align: center;
+    width: 20px;
+    margin: 2px;
+}
+
+.green {
+    background-color: green;
+}
+
+.purple {
+    background-color: purple;
+}
 </style>
