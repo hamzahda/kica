@@ -58,7 +58,6 @@ export default {
 </script>
 
 <style>
-d
 
 body {
   margin: 0px auto;
