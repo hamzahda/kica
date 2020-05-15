@@ -53,7 +53,100 @@
 <script>
 export default {
   name: "App",
-  
+  data: function() {
+    return {
+      sortingMode: "bubbleSort",
+      arraySize: 50,
+      sortSpeed: 150,
+      values: [],
+      sorting: false,
+      sorted: false
+    };
+  },
+  methods: {
+  scramble: function() {
+      this.values = [];
+      this.sorting = false;
+      this.sorted = false;
+      for (let i = 0; i < this.arraySize; i++) {
+        /*Looks strange but I use an object here so rerendering occurs for individual blocks instead
+                  Of having the whole app rerender on every bubblesort iteration, also allows me to add colour information */
+        let obj = {
+          id: Math.random() * 100,
+          sorted: false,
+          active: false
+        };
+        this.values.push(obj);
+      }
+    },
+    async sort() {
+      this.sorting = true;
+      if (this.sortingMode === "bubbleSort") {
+        await this.bubbleSort();
+      } else if (this.sortingMode === "insertionSort") {
+        await this.insertionSort();
+      } else {
+        let arr = [];
+        for (let i = 0; i < this.arraySize; i++) {
+          arr[i] = this.values[i].id;
+
+
+
+
+        }
+        // eslint-disable-next-line no-unused-vars
+        let sortedArray = await this.mergeSort(arr, 0);
+        for (let i = 0; i < this.arraySize; i++) {
+          this.values[i].sorted = true;
+        }
+      }
+      //Resetting state variable so you can sort again
+      this.sorting = false;
+      this.sorted = true;
+    },
+    //Simple bubble sort algorithm
+
+    async bubbleSort() {
+      for (let i = 0; i < this.arraySize; i++) {
+        for (let j = 0; j < this.arraySize - i - 1; j++) {
+          //Changes the current active bar to purple
+          this.values[j].active = true;
+          await this.swapValues(j, j + 1);
+          //change the active bars to false
+          this.values[j].active = false;
+          this.values[j + 1].active = false;
+        }
+        //Changes bar colour to green
+        this.values[this.arraySize - i - 1].sorted = true;
+      }
+    },
+    //Split into separate function here to deal with the async problems that arise with having setTimeout in a loop
+    swapValues: function(j, active) {
+      if (this.values[j].id > this.values[j + 1].id) {
+        //If a bar is being switched, colour it purple
+        this.values[active].active = true;
+        //Switch the two values
+        let tmp = this.values[j].id;
+        this.values[j].id = this.values[j + 1].id;
+        this.values[j + 1].id = tmp;
+      }
+      // wait for sortSpeed amt of time
+      return new Promise(resolve => setTimeout(resolve, 300 - this.sortSpeed));
+    },
+  computed: {
+    blockWidth: function() {
+      return 100 / this.arraySize + "%";
+    }
+  },
+  created() {
+    this.scramble();
+  },
+  watch: {
+    arraySize: function() {
+      this.scramble();
+    }
+  }
+  }
 };
 </script>
 
