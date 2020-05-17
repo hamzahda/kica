@@ -133,6 +133,65 @@ export default {
       // wait for sortSpeed amt of time
       return new Promise(resolve => setTimeout(resolve, 300 - this.sortSpeed));
     },
+    //INSERTION SORT
+    async insertionSort() {
+      for (let i = 1; i < this.arraySize; i++) {
+        this.values[i].sorted = true;
+        let j = i;
+        while (j > 0 && this.values[j - 1].id > this.values[j].id) {
+          await this.swapValues(j - 1, j - 1);
+          this.values[j - 1].active = false;
+          j--;
+        }
+        this.values[i].sorted = false;
+      }
+      for (let i = 0; i < this.arraySize; i++) {
+        this.values[i].sorted = true;
+      }
+    },
+
+    //MERGE SORT
+    async merge(arr1, arr2, index) {
+      let sortedArr = [];
+      while (arr1.length && arr2.length) {
+        if (arr1[0] <= arr2[0]) {
+          sortedArr.push(arr1.shift());
+        } else {
+          sortedArr.push(arr2.shift());
+        }
+      }
+      while (arr1.length) {
+        sortedArr.push(arr1.shift());
+      }
+      while (arr2.length) {
+        sortedArr.push(arr2.shift());
+      }
+      for (let i = 0; i < sortedArr.length; i++) {
+        await this.changeValue(i + index, sortedArr[i]);
+        this.values[i].active = false;
+      }
+      return sortedArr;
+    },
+    changeValue(i, value) {
+      this.values[i].id = value;
+      this.values[i].active = true;
+      return new Promise(resolve => setTimeout(resolve, 300 - this.sortSpeed));
+    },
+    async mergeSort(arr, index) {
+      if (arr.length < 2) {
+        return arr;
+      } else {
+        var midpoint = parseInt(arr.length / 2);
+        var leftArr = arr.slice(0, midpoint);
+        var rightArr = arr.slice(midpoint, arr.length);
+        return this.merge(
+          await this.mergeSort(leftArr, index),
+          await this.mergeSort(rightArr, index + midpoint),
+          index
+        );
+      }
+    //MERGE SORT END
+  },
   computed: {
     blockWidth: function() {
       return 100 / this.arraySize + "%";
