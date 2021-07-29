@@ -1,4 +1,4 @@
-# sorting
+# Frontend for the Python online learning platform of KC
 
 ## Project setup
 ```
